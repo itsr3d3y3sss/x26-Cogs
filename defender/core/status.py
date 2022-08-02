@@ -78,7 +78,7 @@ async def make_status(ctx, cog):
         msg += ("**Warning:** Since the Defender system is **off** every module will be shown as "
                 "disabled, regardless of individual settings.\n")
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"`{p}dset general` to configure")
     em.set_author(name=f"Defender system v{cog.__version__}")
     em.add_field(name="Notify role", value=n_role.mention if n_role else "None set", inline=True)
@@ -151,7 +151,7 @@ async def make_status(ctx, cog):
     msg += "Trusted roles: " + " ".join(trusted_roles) + "\n"
     msg += "Helper roles: " + " ".join(helper_roles)
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"See `{p}dset rank3` `{p}dset general` `{p}dset emergency`")
     em.set_author(name="Ranks and helper roles")
 
@@ -233,7 +233,7 @@ async def make_status(ctx, cog):
     msg += "This module is currently "
     msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"`{p}dset raiderdetection` `{p}dset invitefilter` `{p}dset joinmonitor` to configure.")
     em.set_author(name="Auto modules (1/2)")
 
@@ -313,7 +313,7 @@ async def make_status(ctx, cog):
     msg += "This module is currently "
     msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"`{p}dset warden` `{p}def warden` `{p}dset commentanalysis` to configure.")
     em.set_author(name="Auto modules (2/2)")
 
@@ -368,7 +368,7 @@ async def make_status(ctx, cog):
     msg += "This module is currently "
     msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"`{p}dset alert` `{p}dset vaporize` `{p}dset silence` `{p}dset emergency` to configure.")
     em.set_author(name="Manual modules (1/2)")
 
@@ -397,7 +397,7 @@ async def make_status(ctx, cog):
     msg += "This module is currently "
     msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
 
-    em = discord.Embed(color=discord.Colour.red(), description=msg)
+    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
     em.set_footer(text=f"`{p}dset voteout` `{p}dset emergency` to configure.")
     em.set_author(name="Manual modules (2/2)")
 
