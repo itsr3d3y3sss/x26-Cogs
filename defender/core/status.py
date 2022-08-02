@@ -337,69 +337,9 @@ async def make_status(ctx, cog):
     msg += "This module is currently "
     msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
 
-    if d_enabled:
-        enabled = await cog.config.guild(guild).vaporize_enabled()
-
-    msg += ("**Vaporize   ☁️**\nThis manual module is designed to get rid of vast amounts of bad actors in a quick way "
-            "without creating a mod-log entry. To prevent misuse only **Rank 3** and below are targetable by this "
-            "module. This module can be rendered available to helper roles in *emergency mode*.\n")
-    if EmergencyModules.Vaporize.value in em_modules:
-        msg += "It is set to be rendered available to helper roles in *emergency mode*.\n"
-    else:
-        msg += "It is not set to be available in *emergency mode*.\n"
-    msg += "This module is currently "
-    msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
-
-    if d_enabled:
-        enabled = await cog.config.guild(guild).silence_enabled()
-
-    rank_silenced = await cog.config.guild(guild).silence_rank()
-
-    msg += ("**Silence   🔇**\nThis manual module allows to enable auto-deletion of messages for the selected ranks.\n"
-            "It can be rendered available to helper roles in *emergency mode*.\n")
-    if rank_silenced:
-        msg += (f"It is set to silence **Rank {rank_silenced}** and below.\n")
-    else:
-        msg += ("No rank is set to be silenced.\n")
-    if EmergencyModules.Silence.value in em_modules:
-        msg += "It is set to be rendered available to helper roles in *emergency mode*.\n"
-    else:
-        msg += "It is not set to be available in *emergency mode*.\n"
-    msg += "This module is currently "
-    msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
-
     em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
-    em.set_footer(text=f"`{p}dset alert` `{p}dset vaporize` `{p}dset silence` `{p}dset emergency` to configure.")
-    em.set_author(name="Manual modules (1/2)")
-
-    pages.append(em)
-
-    if d_enabled:
-        enabled = await cog.config.guild(guild).voteout_enabled()
-
-    votes = await cog.config.guild(guild).voteout_votes()
-    rank = await cog.config.guild(guild).voteout_rank()
-    action = await cog.config.guild(guild).voteout_action()
-    wipe = await cog.config.guild(guild).voteout_wipe()
-
-    msg = ("**Voteout   👍 👎**\nThis manual module allows to start a voting session to expel a user from the "
-           "server. It is most useful to helper roles, however staff can also use this.\n"
-           "It can be rendered available to helper roles in *emergency mode*.\n")
-    msg += (f"It is set so that **{votes} votes** (including the issuer) are required to **{action}** "
-            f"the target user, which must be **Rank {rank}** or below.")
-    if Action(action) == Action.Ban and wipe:
-        msg += f"\nThe **ban** will also delete **{wipe} days** worth of messages."
-    msg += "\n"
-    if EmergencyModules.Voteout.value in em_modules:
-        msg += "It is set to be rendered available to helper roles in *emergency mode*.\n"
-    else:
-        msg += "It is not set to be available in *emergency mode*.\n"
-    msg += "This module is currently "
-    msg += "**enabled**.\n\n" if enabled else "**disabled**.\n\n"
-
-    em = discord.Embed(color=discord.Colour.dark_theme(), description=msg)
-    em.set_footer(text=f"`{p}dset voteout` `{p}dset emergency` to configure.")
-    em.set_author(name="Manual modules (2/2)")
+    em.set_footer(text=f"`{p}dset alert` to configure.")
+    em.set_author(name="Manual Modules")
 
     pages.append(em)
 
