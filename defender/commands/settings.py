@@ -399,22 +399,6 @@ class Settings(MixinMeta, metaclass=CompositeMetaClass):  # type: ignore
         else:
             await ctx.send("Silence manual module disabled.")
 
-    @dset.group(name="vaporize")
-    @commands.admin()
-    async def vaporizegroup(self, ctx: commands.Context):
-        """Vaporize manual module configuration
-
-        See [p]defender status for more information about this module"""
-
-    @vaporizegroup.command(name="enable")
-    async def vaporizegroupenable(self, ctx: commands.Context, on_or_off: bool):
-        """Toggle vaporize manual module"""
-        await self.config.guild(ctx.guild).vaporize_enabled.set(on_or_off)
-        if on_or_off:
-            await ctx.send("Vaporize manual module enabled.")
-        else:
-            await ctx.send("Vaporize manual module disabled.")
-
     @dset.group(name="joinmonitor", aliases=["jm"])
     @commands.admin()
     async def joinmonitorgroup(self, ctx: commands.Context):
@@ -739,71 +723,6 @@ class Settings(MixinMeta, metaclass=CompositeMetaClass):  # type: ignore
             await ctx.send("I will delete the offending message.")
         else:
             await ctx.send("I will not delete the offending message.")
-
-    @dset.group(name="voteout")
-    @commands.admin()
-    async def voteoutgroup(self, ctx: commands.Context):
-        """Voteout manual module configuration
-
-        See [p]defender status for more information about this module"""
-
-    @voteoutgroup.command(name="enable")
-    async def voteoutgroupenable(self, ctx: commands.Context, on_or_off: bool):
-        """Toggles voteout"""
-        await self.config.guild(ctx.guild).voteout_enabled.set(on_or_off)
-        if on_or_off:
-            await ctx.send("Voteout enabled.")
-        else:
-            await ctx.send("Voteout disabled.")
-
-    @voteoutgroup.command(name="rank")
-    async def voteoutgrouprank(self, ctx: commands.Context, rank: int):
-        """Sets target rank"""
-        try:
-            if rank < Rank.Rank2.value:
-                raise ValueError()
-            Rank(rank)
-        except:
-            await ctx.send("Not a valid rank. Must be 2-4.")
-            return
-        await self.config.guild(ctx.guild).voteout_rank.set(rank)
-        await ctx.tick()
-
-    @voteoutgroup.command(name="action")
-    async def voteoutgroupaction(self, ctx: commands.Context, action: str):
-        """Sets action (ban, kick, softban, punish)"""
-        action = action.lower()
-        try:
-            if action == Action.NoAction.value:
-                raise ValueError()
-            Action(action)
-        except:
-            await ctx.send("Not a valid action. Must be ban, kick, softban or punish.")
-            return
-        await self.config.guild(ctx.guild).voteout_action.set(action)
-        await ctx.tick()
-
-    @voteoutgroup.command(name="votes")
-    async def voteoutgroupvotes(self, ctx: commands.Context, votes: int):
-        """Sets required votes number for it to pass"""
-        if votes < 2:
-            return await ctx.send("A minimum of 2 votes is required.")
-        action = await self.config.guild(ctx.guild).voteout_action()
-        await self.config.guild(ctx.guild).voteout_votes.set(votes)
-        await ctx.send(f"Votes set. A minimum of {votes} (including "
-                       "the person who started the vote) will be "
-                       f"required to {action} the target user.")
-
-    @voteoutgroup.command(name="wipe")
-    async def voteoutgroupwipe(self, ctx: commands.Context, days: int):
-        """Sets how many days worth of messages to delete if the action is ban
-
-        Setting 0 will not delete any message"""
-        if days < 0 or days > 7:
-            return await ctx.send("Value must be between 0 and 7.")
-        await self.config.guild(ctx.guild).voteout_wipe.set(days)
-        await ctx.send(f"Value set. I will delete {days} days worth "
-                       "of messages if the action is ban.")
 
     @dset.group(name="emergency")
     @commands.admin()
